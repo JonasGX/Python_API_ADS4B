@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/bootstrap.css">
+    <title>FUNCIONARIOS</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1>{{ titulo }}</h1>
+        </div>
+        <table class="table table-striped table-responsive table-bordered">
+            <thead class="thead-default">
+                <tr>
+                    <th>CPF</th>
+                    <th>Nome</th>
+                    <th>Profissão</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for prof in funcionarios %}
+                <tr>
+                    <td>{{ prof.cpf }}</td>
+                    <td>{{ prof.nome }}</td>
+                    <td>{{ prof.profissao }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

@@ -1,34 +1,34 @@
-from flask import Flask
-import requests
-import json
+from flask import Flask, render_template, request, redirect
 
-app = Flask(__name__)
+class Profissao:
+    def __init__(self, cpf, nome, profissao):
+        self.cpf = cpf
+        self.nome = nome
+        self.profissao = profissao
 
-tasks = [
-    {
-        'id': 1,
-        'name': "Joao",
-    },
-    {
-        "id": 2,
-        "name": "Maria",
-        "description": "This is task 2"
-    },
-    {
-        "id": 3,
-        "name": "Pedro",
-    }
-]
+func1 = Profissao('1234','Jonas', 'Engenheiro de Software')
+func2 = Profissao('3456','Maria', 'Desenvolvedor Back-end')
+
+lista = [func1, func2]
 
 
-@app.route('/clientes/cadastro', methods=['POST'])
-def home():
-    pass
+app = Flask(__name__, template_folder='template')
+ 
+@app.route('/',)
+def inicio():
+    return render_template('index.html', titulo='FUNCIONÁRIOS', funcionarios=lista)
 
-@app.route('/clientes')
-def home():
-    tasksJSON = json.dumps(tasks)
-    return tasksJSON
+@app.route('/novo')
+def novo():
+    return render_template('novo.html', titulo='Cadastrar Funcionários')
 
-if __name__ == "__main__":
-    app.run()
+@app.route('/criar', methods=['POST',])
+def criar():
+    cpf = request.form['cpf']
+    nomes = request.form['nome']
+    profissao = request.form['profissao']
+    profissoes = Profissao(cpf, nomes, profissao)
+    lista.append(profissoes)
+    return redirect('/')
+
+app.run(debug=True)
